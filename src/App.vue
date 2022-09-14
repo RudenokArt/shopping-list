@@ -1,14 +1,18 @@
 <template>
   <div class="container pt-5">
-    <div class="row justyfy-content-between mt-1 border" v-for="(item, index) in $store.state.itemsList">
-      <div class="col-8 p-1" v-bind:style="VievItemComplete(item.complete)">
-        {{index}}~{{item.product}}-{{item.complete}}
+    <div class="row justify-content-between mt-1 border" v-for="(item, index) in $store.state.itemsList">
+      <div class="col-7 p-0" v-bind:style="VievItemComplete(item.complete)">
+        {{index}}~{{item.product}}-{{item}}
       </div>
-      <div class="col-1">
-        <button v-bind:class="VievButtonComplete(item.complete)" v-on:click="setItemComplete(index)">
-          <i class="fa fa-check" aria-hidden="true"></i>
-        </button>
+      <div class="col-1 p-0">
+        <CompleteButton v-bind:index="index" v-bind:complete="item.complete"/>
       </div>
+      <div class="col-1 p-0">
+        <DeleteItemButton v-bind:index="index"/>
+      </div>
+    </div>
+    <div class="row justify-content-between pt-2">
+      <AddItemFrom/>
     </div>
   </div>
   <Preloader/>
@@ -17,25 +21,22 @@
 <script>
 
   import Preloader from './components/Preloader.vue';
+  import CompleteButton from './components/CompleteButton.vue';
+  import DeleteItemButton from './components/DeleteItemButton.vue';
+  import AddItemFrom from './components/AddItemFrom.vue';
   export default {
     components: {
-      Preloader,
+      Preloader, CompleteButton, DeleteItemButton, AddItemFrom,
     },
 
     methods: {
-      setItemComplete: function (index) {
-        this.$store.commit('setItemComplete', index);
-      },
 
-      VievItemComplete: function (complete) {
+       VievItemComplete: function (complete) {
         if (complete == 'true') {return 'text-decoration: line-through; color: grey';}
         else {return 'text-decoration: none; color: balck';}
       },
 
-      VievButtonComplete: function (complete) {
-        if (complete == 'true') {return 'btn btn-sm btn-outline-secondary';}
-        else {return 'btn btn-sm btn-outline-success';}
-      }
+     
 
     },
 
@@ -43,7 +44,7 @@
       this.$store.commit('GetItemsList');
     }
 
-  }
+  };
 </script>
 
 <style>

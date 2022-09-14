@@ -22,8 +22,13 @@ export default createStore({
       } else {
         this.state.itemsList[index].complete =  'true';
       }
-      console.log(this.state.itemsList[index].complete);
     },
+    DeleteItem (state, index) {
+      this.state.itemsList.splice(index, 1);
+    },
+     AddItem (state, item) {
+      this.state.itemsList.push(item);
+    }
 
   },
   getters: {
