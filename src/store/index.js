@@ -22,12 +22,15 @@ export default createStore({
       } else {
         this.state.itemsList[index].complete =  'true';
       }
+      this.commit('SaveItemsList');
     },
     DeleteItem (state, index) {
       this.state.itemsList.splice(index, 1);
+      this.commit('SaveItemsList');
     },
-     AddItem (state, item) {
+    AddItem (state, item) {
       this.state.itemsList.push(item);
+      this.commit('SaveItemsList');
     },
     SortItemAsc (state, index) {
       if (index < 1) {return;}
@@ -35,6 +38,7 @@ export default createStore({
       var previous = this.state.itemsList[index-1];
       this.state.itemsList[index] = previous;
       this.state.itemsList[index-1] = current;
+      this.commit('SaveItemsList');
     },
     SortItemDesc (state, index) {
       if (index >= this.state.itemsList.length - 1) {return;}
@@ -42,7 +46,19 @@ export default createStore({
       var next = this.state.itemsList[index+1];
       this.state.itemsList[index] = next;
       this.state.itemsList[index+1] = current;
+      this.commit('SaveItemsList');
     },
+    SaveItemsList: async function () {
+      for (var i = 0; i < this.state.itemsList.length; i++) {
+        this.state.itemsList[i].sort = i;
+      }
+      var list = JSON.stringify(this.state.itemsList);
+      try {
+        fetch(this.state.apiUrl+'save_shopping_list='+list);
+      } catch(e) {
+        console.log(e);
+      }
+    }
 
   },
   getters: {

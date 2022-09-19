@@ -2,7 +2,7 @@
   <div class="container pt-5">
     <div class="row justify-content-between mt-1 border" v-for="(item, index) in $store.state.itemsList">
       <div class="col-7 p-0" v-bind:style="VievItemComplete(item.complete)">
-        {{index}}~{{item.product}}-{{item.sort}}
+        {{index}}~{{item.product}}
       </div>
       <div class="col-1 p-0">
         <CompleteButton v-bind:index="index" v-bind:complete="item.complete"/>

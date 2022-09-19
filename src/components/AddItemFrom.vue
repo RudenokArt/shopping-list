@@ -23,6 +23,7 @@
         item.complete = 'false';
         console.log(item);
         this.$store.commit('AddItem', item);
+        this.itemNew = '';
       },
     },
   };
