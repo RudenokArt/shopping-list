@@ -7,7 +7,7 @@
 <script>
   export default {
     props: {
-      index: {type: String,},
+      index: {type: Number,},
     },
     methods: {
       DeleteItem: function (index) {

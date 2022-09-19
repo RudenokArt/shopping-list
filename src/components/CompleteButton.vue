@@ -7,7 +7,7 @@
    export default {
     props: {
       complete: {type: String,},
-      index: {type: String,},
+      index: {type: Number,},
     },
     methods: {
       setItemComplete: function (index) {

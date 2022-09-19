@@ -28,7 +28,21 @@ export default createStore({
     },
      AddItem (state, item) {
       this.state.itemsList.push(item);
-    }
+    },
+    SortItemAsc (state, index) {
+      if (index < 1) {return;}
+      var current = this.state.itemsList[index];
+      var previous = this.state.itemsList[index-1];
+      this.state.itemsList[index] = previous;
+      this.state.itemsList[index-1] = current;
+    },
+    SortItemDesc (state, index) {
+      if (index >= this.state.itemsList.length - 1) {return;}
+      var current = this.state.itemsList[index];
+      var next = this.state.itemsList[index+1];
+      this.state.itemsList[index] = next;
+      this.state.itemsList[index+1] = current;
+    },
 
   },
   getters: {
