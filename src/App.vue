@@ -23,7 +23,15 @@
   </div>
   <Preloader/>
 </template>
-
+<style scoped>
+  .btn:focus {
+    box-shadow: none;
+  }
+  .btn {
+    display: block;
+    width: 30px;
+  }
+</style>
 <script>
 
   import Preloader from './components/Preloader.vue';
