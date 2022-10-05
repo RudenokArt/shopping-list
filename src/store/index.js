@@ -5,6 +5,7 @@ export default createStore({
     apiUrl: 'http://e25532i4.beget.tech/shopping-list/api/?',
     itemsList: [],
     preloaderVisible: 'display: flex',
+    sortedItem: 1000000,
   },
   mutations: {
     GetItemsList: async function (state) {
@@ -39,6 +40,7 @@ export default createStore({
       this.state.itemsList[index] = previous;
       this.state.itemsList[index-1] = current;
       this.commit('SaveItemsList');
+      this.state.sortedItem = current.sort;
     },
     SortItemDesc (state, index) {
       if (index >= this.state.itemsList.length - 1) {return;}
@@ -47,6 +49,7 @@ export default createStore({
       this.state.itemsList[index] = next;
       this.state.itemsList[index+1] = current;
       this.commit('SaveItemsList');
+      this.state.sortedItem = current.sort;
     },
     SaveItemsList: async function () {
       for (var i = 0; i < this.state.itemsList.length; i++) {

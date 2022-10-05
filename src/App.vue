@@ -1,8 +1,10 @@
 <template>
   <div class="container pt-5">
-    <div class="row justify-content-between mt-1 border" v-for="(item, index) in $store.state.itemsList">
+    <div v-bind:class="sortedItemHighligh(index)"
+    v-for="(item, index) in $store.state.itemsList"
+    class="row justify-content-between mt-1 border">
       <div class="col-7 p-0" v-bind:style="VievItemComplete(item.complete)">
-        {{index}}~{{item.product}}
+        {{index+1}}~{{item.product}}
       </div>
       <div class="col-1 p-0">
         <CompleteButton v-bind:index="index" v-bind:complete="item.complete"/>
@@ -46,12 +48,16 @@
     },
 
     methods: {
-
        VievItemComplete: function (complete) {
         if (complete == 'true') {return 'text-decoration: line-through; color: grey';}
         else {return 'text-decoration: none; color: balck';}
       },
 
+      sortedItemHighligh: function (index) {
+        if (index == this.$store.state.sortedItem) {
+          return 'just-sorted';
+        }
+      },
      
 
     },
@@ -63,6 +69,18 @@
   };
 </script>
 
-<style>
+<style scoped>
 
+@keyframes sort {
+  from {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  to {
+    background: transparent;
+  }
+}
+.just-sorted {
+  animation-name:sort;
+  animation-duration:2s;
+}
 </style>

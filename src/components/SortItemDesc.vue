@@ -16,3 +16,10 @@
     },
   };
 </script>
+
+<style scoped>
+  button:hover {
+    background: transparent;
+    color: #0dcaf0;
+  }
+</style>
