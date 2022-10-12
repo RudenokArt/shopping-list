@@ -1,5 +1,6 @@
 <template>
   <div class="container pt-5">
+    <ListsNavMenu/>
     <div v-bind:class="sortedItemHighligh(index)"
     v-for="(item, index) in $store.state.itemsList"
     class="row justify-content-between mt-1 border">
@@ -42,9 +43,16 @@
   import AddItemFrom from './components/AddItemFrom.vue';
   import SortItemAsc from './components/SortItemAsc.vue';
   import SortItemDesc from './components/SortItemDesc.vue';
+  import ListsNavMenu from './components/ListsNavMenu.vue';
   export default {
     components: {
-      Preloader, CompleteButton, DeleteItemButton, AddItemFrom, SortItemAsc, SortItemDesc,
+      Preloader,
+      CompleteButton,
+      DeleteItemButton,
+      AddItemFrom,
+      SortItemAsc,
+      SortItemDesc,
+      ListsNavMenu,
     },
 
     methods: {

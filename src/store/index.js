@@ -6,8 +6,18 @@ export default createStore({
     itemsList: [],
     preloaderVisible: 'display: flex',
     sortedItem: 1000000,
+    currentList: 1,
+    shoppingListsArr: [],
   },
   mutations: {
+    GetShoppingLists: async function (state) {
+      var itemsList = await fetch(this.state.apiUrl+'get_shopping_lists=Y').then(function (response){
+        return response.text();
+      }).then(function(text){
+        return JSON.parse(text);
+      });
+      this.state.shoppingListsArr = itemsList;
+    },
     GetItemsList: async function (state) {
       var itemsList = await fetch(this.state.apiUrl+'get_shopping_list=Y').then(function (response){
         return response.text();
@@ -65,6 +75,9 @@ export default createStore({
 
   },
   getters: {
+    shoppingListsArr: function (state) {
+      return state.shoppingListsArr;
+    },
   },
   actions: {
   },
